@@ -1,36 +1,77 @@
 <template>
-  <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-app-bar>
+  <v-app id="bni-nexos">
+    <v-navigation-drawer
+    v-model="drawer"
+    app
+    >
+    <v-list dense>
+      <v-list-item 
+      v-for="item in menuItems"
+      :key="item.title"
+      :to="item.link">
+      <v-list-item-action>
+        <v-icon>mdi-{{item.icon}}</v-icon>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title>{{item.title}}</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>    
+  </v-list>
+</v-navigation-drawer>
 
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+<v-app-bar
+app
+color="primary"
+dark
+>
+<v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+<v-toolbar-title>
+  <router-link to="/" tag="span" style="cursor: pointer;">
+    BNI-NEXOS
+  </router-link>
+</v-toolbar-title>
+</v-app-bar>
+
+<v-content>
+  <v-container fluid>
+    <router-view></router-view>
+  </v-container>
+</v-content>
+</v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld,
+  props: {
+    source: String,
   },
   data: () => ({
-    //
+    drawer: false,
   }),
-};
+  computed: {
+    menuItems () {
+      let menuItems = [
+      
+      { icon: 'login', title: 'Entrar', link: '/entrar' },
+
+      ]
+      if (this.userIsAuthenticated) {
+        menuItems = [
+        { icon: 'mdi-new', title: 'Alta miembro', link: '/miembros/nuevo' },        
+        { icon: 'mdi-person', title: 'Perfil Usuario', link: '/usuario/perfil' }
+        ]
+      }
+      return menuItems
+    },
+    userIsAuthenticated () {
+      //return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+      return true;
+    }
+  },
+  methods: {
+    onLogOut () {
+      this.$store.dispatch('logout')
+    }
+  }
+}
 </script>
