@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Member from './views/Member.vue'
 import NewMember from './views/NewMember.vue'
+import EditMember from './views/EditMember.vue'
 import AuthGuard from './auth-guard'
 
 Vue.use(Router)
@@ -29,11 +30,17 @@ export default new Router({
     component: Member
   },
   {
+    path: '/miembro/editar/:id',
+    name: 'edit_member',
+    props: true,
+    component: EditMember
+  },
+  {
     path: '/miembros/nuevo',
     name: 'new_member',
     props: true,
     component: NewMember,
-    beforeEnter: AuthGuard
+    //beforeEnter: AuthGuard
   },
   {
     path: '/about',

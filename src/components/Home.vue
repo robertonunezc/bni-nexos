@@ -9,8 +9,8 @@
       <v-col
       v-for="miembro in miembros"
       :key="miembro.id"
-      sm="cols12"
-      md="cols4">
+      cols="12"
+      md="4">
       <v-card>
         <v-card-title>
           {{ miembro.owner}}
@@ -30,7 +30,6 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-
     </v-col>
   </v-row>
 </v-container>

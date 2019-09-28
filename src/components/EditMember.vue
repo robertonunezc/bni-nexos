@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row>
       <v-flex xs12 offset-sm3>
-        <h4>Alta de miembro</h4>
+        <h4>Editar de miembro</h4>
       </v-flex>
     </v-layout>
     <form @submit.prevent="onCreateMeetup">
@@ -81,11 +81,11 @@
 export default {
   data () {
     return {
-      email: "",
-      phone: "",
-      company: "",
-      imageUrl: "",
-      owner: "",
+      email: "email@local.com",
+      phone: "4429155525",
+      company: "Mi Compañia",
+      imageUrl: "imagen",
+      owner: "Roberto Nuñez",
       files:[]
     }
   },

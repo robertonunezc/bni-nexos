@@ -5,7 +5,7 @@
     app
     >
     <v-list dense>
-      <v-list-item 
+      <v-list-item
       v-for="item in menuItems"
       :key="item.title"
       :to="item.link">
@@ -15,7 +15,7 @@
       <v-list-item-content>
         <v-list-item-title>{{item.title}}</v-list-item-title>
       </v-list-item-content>
-    </v-list-item>    
+    </v-list-item>
   </v-list>
 </v-navigation-drawer>
 
@@ -51,13 +51,13 @@ export default {
   computed: {
     menuItems () {
       let menuItems = [
-      
+
       { icon: 'login', title: 'Entrar', link: '/entrar' },
 
       ]
       if (this.userIsAuthenticated) {
         menuItems = [
-        { icon: 'mdi-new', title: 'Alta miembro', link: '/miembros/nuevo' },        
+        { icon: 'mdi-new', title: 'Alta miembro', link: '/miembros/nuevo' },
         { icon: 'mdi-person', title: 'Perfil Usuario', link: '/usuario/perfil' }
         ]
       }
