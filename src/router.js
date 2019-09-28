@@ -25,13 +25,13 @@ export default new Router({
   },
   {
     path: '/miembro/:id',
-    name: 'member',
+    name: 'ViewMemeber',
     props: true,
     component: Member
   },
   {
     path: '/miembro/editar/:id',
-    name: 'edit_member',
+    name: 'EditMember',
     props: true,
     component: EditMember
   },

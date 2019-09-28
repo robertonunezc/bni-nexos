@@ -72,9 +72,16 @@
           type="submit"
           >GUARDAR
         </v-btn>
-      </v-flex>
-    </v-layout>
-  </form>
+        <v-btn
+        block
+        :to="'/'"
+        outlined
+        class="mt-2"                  
+        >Cancelar
+      </v-btn>
+    </v-flex>
+  </v-layout>
+</form>
 </v-container>
 </template>
 <script>

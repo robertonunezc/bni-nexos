@@ -8,8 +8,11 @@ import vuetify from './plugins/vuetify';
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
+	router,
+	store,
+	vuetify,
+	render: h => h(App),
+	created () {
+		this.$store.dispatch('loadMembers');
+	}
 }).$mount('#app')

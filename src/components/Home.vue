@@ -7,7 +7,7 @@
     </v-row>
     <v-row>
       <v-col
-      v-for="miembro in miembros"
+      v-for="miembro in members"
       :key="miembro.id"
       cols="12"
       md="4">
@@ -15,12 +15,12 @@
         <v-card-title>
           {{ miembro.owner}}
         </v-card-title>
-        <v-card-text>{{miembro.compnay}}</v-card-text>
+        <v-card-text>{{miembro.company }}</v-card-text>
         <v-card-actions class="d-flex justify-space-around">
-          <a :href="`whatsapp://send?text=${miembro.imageUrl}`" data-action="share/whatsapp/share">
+          <a :href="`whatsapp://send?text=${miembro.digitalCard}`" data-action="share/whatsapp/share">
             <img width="35"src="../assets/whatsapp.png" alt="LOGO">
           </a>
-          <a :href="`fb-messenger://share/?link=${miembro.imageUrl}&app_id=123456789`">
+          <a :href="`fb-messenger://share/?link=${miembro.digitalCard}&app_id=123456789`">
             <img width="35"src="../assets/msg.png" alt="LOGO">
           </a>
         </v-card-actions>
@@ -39,31 +39,12 @@
 export default {
   data () {
     return {
-      search: "",
-      miembros:[
-      {
-        id:4,
-        compnay: "PuntoReica",
-        imageUrl: "http://puntoreica.com/img/logo.png",
-        owner: "Pedro Lopez Perez"
-      },
-      {
-        id:5,
-        compnay: "PuntoReica",
-        imageUrl: "http://puntoreica.com/img/logo.png",
-        owner: "Pedro Lopez Perez"
-      },{
-        id:6,
-        compnay: "PuntoReica",
-        imageUrl: "http://puntoreica.com/img/logo.png",
-        owner: "Pedro Lopez Perez"
-      },{
-        id:7,
-        compnay: "PuntoReica",
-        imageUrl: "http://puntoreica.com/img/logo.png",
-        owner: "Pedro Lopez Perez"
-      }
-      ]
+      search: ""     
+    }
+  },
+  computed: {
+    members () {
+      return this.$store.getters.getMembers
     }
   } 
 };
