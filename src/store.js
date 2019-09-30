@@ -44,6 +44,23 @@ export default new Vuex.Store({
 					console.log(error)
 				})
 		},
+		registerUser({commit, getters}, payload){
+			console.log('Register user')
+			const email = payload.email;
+			//TODO revisar como hacer hash de esto primero o usar ssl en el server
+			const password = payload.password;
+			const data = {
+				'email': email,
+				'password': password
+			}
+			axios.post(`${baseUrl}register`,data)
+			.then( response =>{
+				console.log("Registerd user",response)
+			}).catch(
+				(error) => {
+					console.log(error)
+				})
+		}
 	},
 	getters: {
 		getMembers (state) {

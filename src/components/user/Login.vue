@@ -27,7 +27,7 @@
         <v-text-field
         label="Correo electrónico"
         name="login"
-        prepend-icon="mail"
+        prepend-icon="mdi-mail"
         type="text"
         ></v-text-field>
 
@@ -35,7 +35,7 @@
         id="password"
         label="Contraseña"
         name="password"
-        prepend-icon="lock"
+        prepend-icon="mdi-lock"
         type="password"
         ></v-text-field>
       </v-form>

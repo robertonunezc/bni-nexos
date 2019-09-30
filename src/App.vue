@@ -58,7 +58,8 @@ export default {
       if (this.userIsAuthenticated) {
         menuItems = [
         { icon: 'mdi-new', title: 'Alta miembro', link: '/miembros/nuevo' },
-        { icon: 'mdi-person', title: 'Perfil Usuario', link: '/usuario/perfil' }
+        { icon: 'mdi-person', title: 'Perfil Usuario', link: '/usuario/perfil' },
+        { icon: 'mdi-lock', title: 'Registrar Administrador', link: '/registrar' }
         ]
       }
       return menuItems

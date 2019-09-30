@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
+import RegisterUser from './views/RegisterUser.vue'
 import Member from './views/Member.vue'
 import NewMember from './views/NewMember.vue'
 import EditMember from './views/EditMember.vue'
@@ -22,6 +23,13 @@ export default new Router({
     path: '/entrar',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/registrar',
+    name: 'RegisterUser',
+    //beforeEnter: AuthGuard,
+    component: RegisterUser,
+
   },
   {
     path: '/miembro/:id',
