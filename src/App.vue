@@ -16,6 +16,16 @@
         <v-list-item-title>{{item.title}}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
+           <v-list-item v-if="userIsAuthenticated"
+           @click="onLogOut"
+      >
+      <v-list-item-action>
+        <v-icon>mdi-out</v-icon>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title>Salir</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
   </v-list>
 </v-navigation-drawer>
 
@@ -58,20 +68,21 @@ export default {
       if (this.userIsAuthenticated) {
         menuItems = [
         { icon: 'mdi-new', title: 'Alta miembro', link: '/miembros/nuevo' },
-        { icon: 'mdi-person', title: 'Perfil Usuario', link: '/usuario/perfil' },
         { icon: 'mdi-lock', title: 'Registrar Administrador', link: '/registrar' }
         ]
       }
       return menuItems
     },
     userIsAuthenticated () {
-      //return this.$store.getters.user !== null && this.$store.getters.user !== undefined
-      return true;
+      return this.$store.getters.getUser !== null 
+      && this.$store.getters.getUser !== undefined
+      &&  this.$store.getters.getUser != ""     
     }
   },
   methods: {
     onLogOut () {
       this.$store.dispatch('logout')
+      this.$route.push('/')
     }
   }
 }

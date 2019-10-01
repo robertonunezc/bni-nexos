@@ -112,6 +112,9 @@ export default new Vuex.Store({
 				(error) => {
 					console.log(error)
 				})
+		},
+		logout({commit}){
+			commit('setUser',null)
 		}
 	},
 	getters: {
