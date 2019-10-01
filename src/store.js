@@ -8,6 +8,7 @@ export default new Vuex.Store({
 	state: {
 		loadedMembers: [],	
 		user: null,
+		successMsg:"",
 		error: null,
 		loading: false
 	},
@@ -16,10 +17,19 @@ export default new Vuex.Store({
 		setLoadedMembers (state, payload) {
 			state.loadedMembers = payload
 		},
+		setSuccessMsg(state,payload) {
+			state.successMsg = payload;
+		},
+		setUser(state,payload) {
+			state.user = payload;
+		},
+		setMember(state,payload) {
+			state.loadedMembers.push(payload);
+		}
 	},
 	/* estos son los metodos q se llaman desde otros lugares para interactuar con los estados
 	* estos metodos internamente para manipular la informacion llaman a los mutation co el commit */
-	actions: {
+	actions: {		
 		loadMembers ({commit}) {
 			console.log('Loading members')
 			axios.get(`${baseUrl}members`)
@@ -36,14 +46,14 @@ export default new Vuex.Store({
 						email: member.email
 					})
 				});				
-				console.table('Members Loaded', members)
-				commit('setLoadedMembers', members)
+				console.table('Members Loaded', members);
+				commit('setLoadedMembers', members);
 			})
 			.catch(
 				(error) => {
 					console.log(error)
 				})
-		},
+		},		
 		registerUser({commit, getters}, payload){
 			console.log('Register user')
 			const email = payload.email;
@@ -55,7 +65,30 @@ export default new Vuex.Store({
 			}
 			axios.post(`${baseUrl}register`,data)
 			.then( response =>{
-				console.log("Registerd user",response)
+				if(response.data.code == 200){
+					console.log("Registerd user",response)
+					return alert('Usuario creado correctamente');				
+				}
+				return alert('Error al crear usuario')
+			}).catch(
+				(error) => {
+					console.log(error)
+				})
+		},				
+		registerMember({commit}, payload){
+			console.log('Register member')
+			const memberData = payload;
+		
+			axios.post(`${baseUrl}members/add`,memberData)
+			.then( response =>{
+				if(response.data.code == 200){					
+					const memberData = response.data.data;
+					console.log("Registerd member",response.data);
+					commit('setMember', memberData);
+					commit('setSuccessMsg', "Miembro creado correctamente");		
+					return;			
+				}
+				return alert('Error al crear miembro')
 			}).catch(
 				(error) => {
 					console.log(error)
@@ -70,6 +103,12 @@ export default new Vuex.Store({
 		},
 		getMember: (state) => (id) => {
 			return state.loadedMembers.find(member => member.id == id)
-		}		
+		},
+		getUser: (state) => {
+			return state.user
+		},
+		getSuccessMsg: (state) => {
+			return state.successMsg
+		}
 	}
 })

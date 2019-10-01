@@ -77,7 +77,7 @@ export default {
         password: this.password,
       }
       this.$store.dispatch('registerUser', userData);
-      //this.$router.push('/')
+      this.$router.push('/')
     }
   }
 }

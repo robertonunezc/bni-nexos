@@ -5,7 +5,7 @@
         <h4>Alta de miembro</h4>
       </v-flex>
     </v-layout>
-    <form @submit.prevent="onCreateMeetup">
+    <form @submit.prevent="onRegisterMember">
       <v-layout row>
         <v-flex xs12 sm6 offset-sm3>
           <v-text-field
@@ -91,31 +91,29 @@ export default {
       email: "",
       phone: "",
       company: "",
-      imageUrl: "",
       owner: "",
       files:[]
     }
   },
   computed: {
     formIsValid () {
-      return this.title !== '' &&
-      this.location !== '' &&
-      this.imageUrl !== '' &&
-      this.description !== ''
+      return this.email !== '' &&
+      this.phone !== '' &&
+      this.files !== '' &&
+      this.company !== '' && this.owner != ""
     }
   },
   methods: {
-    onCreateMeetup () {
-      const meetupData = {
-        id: '123344',
-        title: this.title,
-        location: this.location,
-        description: this.description,
-        imageUrl: this.imageUrl,
-        date: new Date()
+    onRegisterMember () {
+      const memberData = {       
+        owner: this.owner,
+        company: this.company,
+        phone: this.phone,
+        email: this.email,
+        digitalCard: "google.com",
       }
-      this.$store.dispatch('createMeetup', meetupData)
-      this.$router.push('/meetups')
+      this.$store.dispatch('registerMember', memberData)
+      this.$router.push('/')
     }
   }
 }
