@@ -97,9 +97,16 @@ export default new Vuex.Store({
 	},
 	getters: {
 		getMembers (state) {
-			return state.loadedMembers.sort((memberA, memberB) => {
-				return memberA.id > memberB.id
-			})
+			return (search) => {
+				console.log('Seaching by', search);
+				if(search != "" && search.length > 2){
+					return state.loadedMembers.filter( member => {
+						return member.owner.toLowerCase().includes(search.toLowerCase());
+					})					
+				}
+				return state.loadedMembers;
+				
+			}	
 		},
 		getMember: (state) => (id) => {
 			return state.loadedMembers.find(member => member.id == id)

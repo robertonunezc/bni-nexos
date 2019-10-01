@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     members () {
-      return this.$store.getters.getMembers;
+      return this.$store.getters.getMembers(this.search);
     },
     successMsg () {
       return this.$store.getters.getSuccessMsg;
