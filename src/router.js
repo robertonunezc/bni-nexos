@@ -27,13 +27,13 @@ export default new Router({
   {
     path: '/registrar',
     name: 'RegisterUser',
-    //beforeEnter: AuthGuard,
+    beforeEnter: AuthGuard,
     component: RegisterUser,
 
   },
   {
     path: '/miembro/:id',
-    name: 'ViewMemeber',
+    name: 'ViewMember',
     props: true,
     component: Member
   },
@@ -41,6 +41,7 @@ export default new Router({
     path: '/miembro/editar/:id',
     name: 'EditMember',
     props: true,
+    beforeEnter: AuthGuard,
     component: EditMember
   },
   {
@@ -48,15 +49,7 @@ export default new Router({
     name: 'new_member',
     props: true,
     component: NewMember,
-    //beforeEnter: AuthGuard
-  },
-  {
-    path: '/about',
-    name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+    beforeEnter: AuthGuard
+  }
     ]
   })

@@ -1,13 +1,13 @@
 <template>
   <v-container>
-    <v-layout wrap>
+    <v-layout>
       <v-row>
         <v-col cols="12">
-          <v-card>         
+          <v-card 
+            max-width="100%">         
             <v-img
-            :src="member.digitalCard"
-            height="250px"
-            max-width="310px"
+            max-height="250px"
+            :src="member.digitalCard"            
             ></v-img>
             <v-card-title primary-title>
               <div>

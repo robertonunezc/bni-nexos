@@ -9,7 +9,7 @@ export default new Vuex.Store({
 		loadedMembers: [],	
 		user: null,
 		successMsg:"",
-		error: null,
+		error: "",
 		loading: false
 	},
 	/* estos mutation son los metodos q ejecutan acciones a los states como tal */
@@ -22,6 +22,9 @@ export default new Vuex.Store({
 		},
 		setUser(state,payload) {
 			state.user = payload;
+		},
+		setError(state,payload) {
+			state.error = payload;
 		},
 		setMember(state,payload) {
 			state.loadedMembers.push(payload);
@@ -41,7 +44,7 @@ export default new Vuex.Store({
 						id: member['id'],
 						owner: member.owner,
 						company: member.company,
-						digitalCard: member.digitalCard,
+						digitalCard: `${baseUrl}images/tarjetas/${member.digitalCard}`,
 						phone: member.phone,						
 						email: member.email
 					})
@@ -93,6 +96,22 @@ export default new Vuex.Store({
 				(error) => {
 					console.log(error)
 				})
+		},
+		login({commit}, payload){
+			const loginData = payload;
+			axios.post(`${baseUrl}login`,loginData)
+			.then( response =>{
+				if(response.data.code == 200){					
+					const userToken = response.data.data;
+					console.log("Login ok",response.userToken);
+					commit('setUser', userToken);
+					return;			
+				}
+				commit('setError', "Revise los datos de acceso.")
+			}).catch(
+				(error) => {
+					console.log(error)
+				})
 		}
 	},
 	getters: {
@@ -104,18 +123,20 @@ export default new Vuex.Store({
 						return member.owner.toLowerCase().includes(search.toLowerCase());
 					})					
 				}
-				return state.loadedMembers;
-				
+				return state.loadedMembers;				
 			}	
 		},
 		getMember: (state) => (id) => {
-			return state.loadedMembers.find(member => member.id == id)
+			return state.loadedMembers.find(member => member.id == id);
 		},
 		getUser: (state) => {
-			return state.user
+			return state.user;
 		},
 		getSuccessMsg: (state) => {
-			return state.successMsg
+			return state.successMsg;
+		},
+		getError: (state) => {
+			return state.error;
 		}
 	}
 })
