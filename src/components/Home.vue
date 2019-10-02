@@ -28,10 +28,10 @@
         </v-card-title>
         <v-card-text>{{miembro.company }}</v-card-text>
         <v-card-actions class="d-flex justify-space-around">
-          <a :href="`whatsapp://send?text=${miembro.digitalCard}`" data-action="share/whatsapp/share">
+          <a :href="`whatsapp://send?text=${digitalCardUrl}${miembro.digitalCard}`" data-action="share/whatsapp/share">
             <img width="35" src="../assets/whatsapp.png" alt="LOGO">
           </a>
-          <a :href="`fb-messenger://share/?link=${miembro.digitalCard}&app_id=123456789`">
+          <a :href="`fb-messenger://share/?link=${digitalCardUrl}${miembro.digitalCard}&app_id=123456789`">
             <img width="35" src="../assets/msg.png" alt="LOGO">
           </a>
         </v-card-actions>
@@ -50,10 +50,16 @@
 export default {
   data () {
     return {
-      search: "",    
+      search: "", 
+      member:null   
     }
   },
+  
   computed: {
+    digitalCardUrl () {
+      const digitalCard = this.$store.getters.getDigitalCardUrl      
+      return this.$store.getters.getDigitalCardUrl      
+    },
     members () {
       return this.$store.getters.getMembers(this.search);
     },

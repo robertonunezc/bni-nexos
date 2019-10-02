@@ -40,10 +40,10 @@
               <label>Compartir en:</label>
             </v-card-title>
             <v-card-actions class="justify-space-around">
-             <a :href="`whatsapp://send?text=${member.imageUrl}`" data-action="share/whatsapp/share">
+             <a :href="`whatsapp://send?text=${digitalCardUrl}`" data-action="share/whatsapp/share">
               <img width="35" src="../assets/whatsapp.png" alt="LOGO">
             </a>
-            <a :href="`fb-messenger://share/?link=${member.imageUrl}&app_id=123456789`">
+            <a :href="`fb-messenger://share/?link=${digitalCardUrl}&app_id=123456789`">
               <img width="35" src="../assets/msg.png" alt="LOGO">
             </a>            
           </v-card-actions>
