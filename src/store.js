@@ -10,7 +10,8 @@ export default new Vuex.Store({
 		user: null,
 		successMsg:"",
 		error: "",
-		loading: false
+		loading: false,
+		baseUrl: baseUrl
 	},
 	/* estos mutation son los metodos q ejecutan acciones a los states como tal */
 	mutations: {
@@ -44,7 +45,7 @@ export default new Vuex.Store({
 						id: member['id'],
 						owner: member.owner,
 						company: member.company,
-						digitalCard: `${baseUrl}images/tarjetas/${member.digitalCard}`,
+						digitalCard: member.digitalCard,
 						phone: member.phone,						
 						email: member.email
 					})
@@ -140,6 +141,9 @@ export default new Vuex.Store({
 		},
 		getError: (state) => {
 			return state.error;
+		},
+		getDigitalCardUrl: (state) => {
+			return `${state.baseUrl}images/tarjetas/`;
 		}
 	}
 })

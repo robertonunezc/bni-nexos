@@ -32,12 +32,13 @@
       </v-layout>
       <v-layout row>
         <v-flex xs12 sm6 offset-sm3>
-          <v-file-input
+          <input
+          type="file"
           accept="image/png, image/jpeg, image/bmp"
-          v-model="files"
           placeholder="Tarjeta Digital"
           prepend-icon="mdi-paperclip"
-          ></v-file-input>
+          @change="onFilePicked($event.target.name, $event.target.files)"
+          />
         </v-flex>
       </v-layout>
       <v-layout row>
@@ -92,7 +93,8 @@ export default {
       phone: "",
       company: "",
       owner: "",
-      files:[]
+      imageName: "",
+      files:""
     }
   },
   computed: {
@@ -100,10 +102,17 @@ export default {
       return this.email !== '' &&
       this.phone !== '' &&
       this.files !== '' &&
+      this.imageName !== '' &&
       this.company !== '' && this.owner != ""
     }
   },
   methods: {
+    onFilePicked(fileName, files){
+      this.imageName = files[0].name
+      this.files = files
+      console.log(fileName, files)
+			
+    },
     onRegisterMember () {
       const memberData = {       
         owner: this.owner,
@@ -112,7 +121,15 @@ export default {
         email: this.email,
         digitalCard: "google.com",
       }
-      this.$store.dispatch('registerMember', memberData)
+      let formData = new FormData();
+      formData.append('digitalCardName', this.imageName);
+      formData.append('owner', this.owner);
+      formData.append('company', this.company);
+      formData.append('phone', this.phone);
+      formData.append('email', this.email);
+      formData.append('file', this.files[0]);
+
+      this.$store.dispatch('registerMember', formData)
       this.$router.push('/')
     }
   }

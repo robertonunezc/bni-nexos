@@ -7,7 +7,7 @@
             max-width="100%">         
             <v-img
             max-height="250px"
-            :src="member.digitalCard"            
+            :src="`${digitalCardUrl}${member.digitalCard}`"            
             ></v-img>
             <v-card-title primary-title>
               <div>
@@ -67,8 +67,10 @@ export default {
   computed: {
     member () {
       const memberId = this.$route.params.id;
-      return this.$store.getters.getMember(memberId)
-      
+      return this.$store.getters.getMember(memberId)      
+    },
+    digitalCardUrl () {
+      return this.$store.getters.getDigitalCardUrl
     }
   }
 
