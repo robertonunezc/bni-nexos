@@ -9,11 +9,11 @@
       <v-layout row>
         <v-flex xs12 sm6 offset-sm3>
           <v-text-field
-          name="email"
-          label="Correo electrónico"
-          id="email"
-          type="email"
-          v-model="email"
+          name="usuario"
+          label="Usuario"
+          id="usuario"
+          type="text"
+          v-model="usuario"
           prepend-icon="mdi-mail"
           required
           ></v-text-field>
@@ -56,13 +56,13 @@
 export default {
   data () {
     return {
-      email: "",
+      usuario: "",
       password: "",
     }
   },
   computed: {
     formIsValid () {
-      return this.email !== '' &&
+      return this.usuario !== '' &&
       this.password !== '' && this.password.length >= 6
     }
   },
@@ -73,7 +73,7 @@ export default {
         return;
       }
       const userData = {        
-        email: this.email,
+        email: this.usuario,
         password: this.password,
       }
       this.$store.dispatch('registerUser', userData);
