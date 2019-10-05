@@ -36,7 +36,7 @@
           </a>
         </v-card-actions>
         <v-card-actions>
-          <v-btn block color="primary":to="'/miembro/' + miembro.id">                 
+          <v-btn block color="primary" :to="'/miembro/' + miembro.id">                 
             Ver perfil
           </v-btn>
         </v-card-actions>

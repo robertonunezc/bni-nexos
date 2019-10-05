@@ -10,7 +10,7 @@
              height:250px;
              background-size: cover;
              background-position: center;"
-              v-bind:style="{ 'backgroundImage': 'url('+digitalCardUrl+')' }">
+              v-bind:style="{ 'backgroundImage': 'url('+digitalCardUrlBackGround+')' }">
             
             </div>
             <!-- <img
@@ -79,9 +79,13 @@ export default {
       this.member = this.$store.getters.getMember(memberId)    
   },
   computed: {      
-    digitalCardUrl () {
+    digitalCardUrlBackGround () {
       const digitalCard = this.$store.getters.getDigitalCardUrl      
       return `'${digitalCard}${this.member.digitalCard}'`
+    },
+    digitalCardUrl () {
+      const digitalCard = this.$store.getters.getDigitalCardUrl      
+      return `${digitalCard}${this.member.digitalCard}`
     }
   }
 
