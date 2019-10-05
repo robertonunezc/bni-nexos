@@ -47,7 +47,7 @@
               <img width="35" src="../assets/msg.png" alt="LOGO">
             </a>            
           </v-card-actions>
-          <v-card-actions>
+          <v-card-actions v-if="isAuthenticated">
             <v-row>
               <v-col cols="6">
                 <v-btn block color="primary" class="m-2":to="'/member/editar/' + member.id">Editar datos</v-btn>                
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return { 
@@ -86,7 +87,14 @@ export default {
     digitalCardUrl () {
       const digitalCard = this.$store.getters.getDigitalCardUrl      
       return `${digitalCard}${this.member.digitalCard}`
+    },
+    isAuthenticated(){
+      if(this.$store.getters.getUser !== "" && this.$store.getters.getUser != null ){
+        return true;
+      } 
+      return   false;
     }
+  
   }
 
 }
