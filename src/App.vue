@@ -45,6 +45,9 @@ dark
 <v-content>
   <v-container fluid>
     <router-view></router-view>
+    <div  class="text-center caption">
+      <a href="http://puntoreica.com">Desarrollado por PUNTOREICA</a>
+    </div>
   </v-container>
 </v-content>
 </v-app>
