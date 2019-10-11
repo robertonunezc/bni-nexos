@@ -24,6 +24,9 @@ export default new Vuex.Store({
 		setUser(state,payload) {
 			state.user = payload;
 		},
+		setEmptyMembers(state){
+			state.loadedMembers = [];
+		},
 		setError(state,payload) {
 			state.error = payload;
 		},
@@ -57,7 +60,36 @@ export default new Vuex.Store({
 				(error) => {
 					console.log(error)
 				})
-		},		
+		},	
+		deleteMember({commit}, payload){
+			axios.get(`${baseUrl}members/delete/${payload.id}`)
+			.then( response =>{
+				if(response.data.code == 200){
+					commit('setEmptyMembers');
+					console.log("User Deleted",response);					
+					const members = [];
+					const data = response.data.data;
+					data.forEach((member, index) =>{
+						members.push({
+							id: member['id'],
+							owner: member.owner,
+							company: member.company,
+							digitalCard: member.digitalCard,
+							phone: member.phone,						
+							email: member.email
+						})
+					});				
+					commit('setLoadedMembers', members);
+					commit('setSuccessMsg', "Miembro borrado correctamente");		
+					return;
+				}
+				return alert('Error al borrar usuario');
+			}).catch(
+				(error) => {
+					console.log(error)
+					return alert('Error al borrar usuario');
+				})
+		},
 		registerUser({commit, getters}, payload){
 			console.log('Register user')
 			const email = payload.email;
